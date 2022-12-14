@@ -1,0 +1,15 @@
+.DS_Store
+node_modules
+
+src
+test
+coverage
+
+.idea
+.vscode
+
+.editorconfig
+tsconfig.json
+
+*-lock.json
+*.lock
