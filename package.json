@@ -1,6 +1,6 @@
 {
   "name": "@celebi/cheerio-extract",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Get information using the string of the specified rule",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -20,7 +20,8 @@
     "url": "https://github.com/milcery/cheerio-extract"
   },
   "dependencies": {
-    "@celebi/mint-filter": "^3.0.1-beta.3"
+    "@celebi/mint-filter": "^3.0.1-beta.3",
+    "cheerio": "^1.0.0-rc.12"
   },
   "devDependencies": {
     "@types/jest": "^29.2.4",
