@@ -1,10 +1,11 @@
-# @celebi/cheerio-extract
+# @atlach/html-extract
 
 Get information using the string of the specified rule
 
 ## Usage
 
-```html
+### Nodejs
+```javascript
 const HTML = `
 <div>
   <a id="link" class="link" href="//github.com" data-id="link">Github</a>
@@ -34,15 +35,33 @@ const HTML = `
   </ul>
 </div>
 `
-import CheerioExtract from '@celebi/cheerio-extract';  // ES module
-// const CheerioExtract = require('@celebi/cheerio-extract').default; // Commonjs
+import HtmlExtract from '@atlach/html-extract';  // ES module
+// const HtmlExtract = require('@atlach/html-extract').default; // Commonjs
 
-const ce = new CheerioExtract(HTML);
+const he = new HtmlExtract(HTML);
 
 // Get data
-ce.query();
+he.query();
 // Add custom function
-ce.useFilter();
+he.useFilter();
+```
+
+### Browser
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@atlach/html-extract@0.1.0/dist/html-extract.browser.js"></script>
+
+<script>
+  document.addEventListener('load', () => {
+    const he = new HtmlExtract();
+
+    // Get data
+    he.query();
+    // Add custom function
+    he.useFilter();
+  });
+</script>
 ```
 
 
@@ -55,8 +74,8 @@ ce.useFilter();
 ### attribute
 
 ```javascript
-ce.query('.link :href')               // output -> //github.com
-ce.query('.link :data-id')            // output -> link
+he.query('.link :href')               // output -> //github.com
+he.query('.link :data-id')            // output -> link
 ```
 
 ### Filter method
@@ -73,34 +92,34 @@ Self-filtering methods
 
 ### html or text
 ```javascript
-ce.query('.link | text')              // output -> Github
-ce.query('dd | html')                 // output -> <p>content</p>
+he.query('.link | text')              // output -> Github
+he.query('dd | html')                 // output -> <p>content</p>
 ```
 
 ### delete dom
 ```javascript
-ce.query('section -u | text | trim');        // output -> prefixsuffix
+he.query('section -u | text | trim');        // output -> prefixsuffix
 ```
 
 ### add prefix or suffix
 ```javascript
-ce.query('.link :href | prefix(https:)')                     // output -> https://github.com
-ce.query('.link :href | suffix(?q=123)')                     // output -> //github.com?q=123
-ce.query('.link :href | prefix(https:) | suffix(?q=123)')    // output -> https://github.com?q=123
+he.query('.link :href | prefix(https:)')                     // output -> https://github.com
+he.query('.link :href | suffix(?q=123)')                     // output -> //github.com?q=123
+he.query('.link :href | prefix(https:) | suffix(?q=123)')    // output -> https://github.com?q=123
 ```
 
 ### eq
 ```javascript
-ce.query('ul li:eq(2) :data-index')        // output -> 3
-ce.query('ul li | eq(2) :data-index')      // output -> 3
+he.query('ul li:eq(2) :data-index')        // output -> 3
+he.query('ul li | eq(2) :data-index')      // output -> 3
 ```
 
 ### filter text
 
 ```javascript
-ce.query('ul li:eq(2) a :href')                    // output -> //a.com/id1/103
+he.query('ul li:eq(2) a :href')                    // output -> //a.com/id1/103
 // Filter out '1' and '/'
-ce.query('ul li:eq(2) a :href | filter(1, /)')     // output -> a.comid03
+he.query('ul li:eq(2) a :href | filter(1, /)')     // output -> a.comid03
 ```
 
 
@@ -114,7 +133,7 @@ grammar
 Get one
 
 ```javascript
-ce.query('ul li | array(| text | trim)')
+he.query('ul li | array(| text | trim)')
 
 // output ->
   [
@@ -129,7 +148,7 @@ Two-dimensional array
 Note: The parameter is best to add `()`
 
 ```javascript
-ce.query('ul li | array((:data-index), (a | text))')
+he.query('ul li | array((:data-index), (a | text))')
 
 // output ->
   [
@@ -144,7 +163,7 @@ Object data
 => The front is the key, => The following is the rule, the rule is best to be wrapped with ()
 
 ```javascript
-ce.query('ul a | array(href => (:href | prefix(https:)), title => (| text))')
+he.query('ul a | array(href => (:href | prefix(https:)), title => (| text))')
 
 // output ->
   [
@@ -158,9 +177,9 @@ ce.query('ul a | array(href => (:href | prefix(https:)), title => (| text))')
 ### Custom filtering methods
 
 ```javascript
-ce.useFilter('prefixAndSuffix', (val, prefix, suffix) => prefix + val + suffix)
+he.useFilter('prefixAndSuffix', (val, prefix, suffix) => prefix + val + suffix)
 
-ce.query('.link :href | prefixAndSuffix(https:, ?q=123)')   // output -> https://github.com?q=123
+he.query('.link :href | prefixAndSuffix(https:, ?q=123)')   // output -> https://github.com?q=123
 ```
 
 

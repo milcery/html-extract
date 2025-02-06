@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "ESNext",
     "esModuleInterop": true,
-    "target": "es6",
+    "target": "ES2021",
     "noImplicitAny": true,
     "moduleResolution": "node",
     "declaration": true,
@@ -22,6 +22,7 @@
     "dist"
   ],
   "include": [
-    "src/**/*"
+//    "src/types/*",
+//    "src/**/*"
   ]
 }

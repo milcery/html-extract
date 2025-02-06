@@ -1,4 +1,4 @@
-import CheerioExtract from '../src/index';
+import HtmlExtract from '../src/main';
 
 const HTML = `
 <div>
@@ -31,80 +31,80 @@ const HTML = `
 `;
 
 describe('Test CheerioExtract', () => {
-  let ce = new CheerioExtract(HTML);
+  let he = new HtmlExtract(HTML);
 
   beforeEach(() => {
-    ce = new CheerioExtract(HTML);
+    he = new HtmlExtract(HTML);
   });
 
   it('Class selector', () => {
-    const result = ce.query('.link :href');
+    const result = he.query('.link :href');
     expect(result).toBe('//github.com');
   });
 
   it('Id selector', () => {
-    const result = ce.query('#link :href');
+    const result = he.query('#link :href');
     expect(result).toBe('//github.com');
   });
 
   it('Get Properties', () => {
-    const result = ce.query('.link :href');
+    const result = he.query('.link :href');
     expect(result).toBe('//github.com');
   });
 
   it('Get custom properties', () => {
-    const result = ce.query('.link :data-id');
+    const result = he.query('.link :data-id');
     expect(result).toBe('link');
   });
 
   it('Get text', () => {
-    const result = ce.query('.link | text');
+    const result = he.query('.link | text');
     expect(result).toBe('Github');
   });
 
   it('Get html', () => {
-    const result = ce.query('dd | html');
+    const result = he.query('dd | html');
     expect(result).toBe('<p>content</p>');
   });
 
   it('trim', () => {
-    const result = ce.query('section | text | trim');
+    const result = he.query('section | text | trim');
     expect(result).toBe('prefix123suffix');
   });
 
   it('Add prefix', () => {
-    const result = ce.query('.link :href | prefix(https:)');
+    const result = he.query('.link :href | prefix(https:)');
     expect(result).toBe('https://github.com');
   });
 
   it('Add suffix', () => {
-    const result = ce.query('.link :href | suffix(?q=123)');
+    const result = he.query('.link :href | suffix(?q=123)');
     expect(result).toBe('//github.com?q=123');
   });
 
   it('Remove dom', () => {
-    const result = ce.query('section -u | text | trim');
+    const result = he.query('section -u | text | trim');
     expect(result).toBe('prefixsuffix');
   });
 
   it('Specify subscript 1', () => {
-    const result = ce.query('ul li:eq(2) :data-index');
+    const result = he.query('ul li:eq(2) :data-index');
     expect(result).toBe('3');
   });
 
   it('Specify subscript 2', () => {
-    const result = ce.query('ul li | eq(2) :data-index');
+    const result = he.query('ul li | eq(2) :data-index');
     expect(result).toBe('3');
   });
 
   it('Filter text', () => {
-    const result = ce.query('section | text | trim | filter(f, i, x)');
+    const result = he.query('section | text | trim | filter(f, i, x)');
 
     expect(result).toBe('pre123su');
   });
 
   it('Filter text2', () => {
-    const result = ce.query('ul li:eq(2) a :href | filter(/, 1)');
+    const result = he.query('ul li:eq(2) a :href | filter(/, 1)');
 
     expect(result).toBe('a.comid03');
   });
@@ -116,7 +116,7 @@ describe('Test CheerioExtract', () => {
       '(3)',
       '(4)'
     ];
-    const result = ce.query('ul li | array(| text | trim)');
+    const result = he.query('ul li | array(| text | trim)');
 
     // @ts-ignore
     result.forEach((t: string, index: number) => {
@@ -131,7 +131,7 @@ describe('Test CheerioExtract', () => {
       ['3', '(3)'],
       ['4', '(4)']
     ];
-    const result = ce.query('ul li | array((:data-index), (a | text))');
+    const result = he.query('ul li | array((:data-index), (a | text))');
 
     // @ts-ignore
     result.forEach((t: string, index: number) => {
@@ -151,7 +151,7 @@ describe('Test CheerioExtract', () => {
       { href: 'https://a.com/id1/103', title: '(3)' },
       { href: 'https://a.com/id1/104', title: '(4)' },
     ];
-    const result = ce.query('ul a | array(href => (:href | prefix(https:)), title => (| text))');
+    const result = he.query('ul a | array(href => (:href | prefix(https:)), title => (| text))');
 
     // @ts-ignore
     result.forEach((t: Obj, index: number) => {
@@ -161,9 +161,9 @@ describe('Test CheerioExtract', () => {
   });
 
   it('Custom Filters', () => {
-    ce.useFilter('prefixAndSuffix', (str: any, p: any, s: any): any => p + str + s);
+    he.useFilter('prefixAndSuffix', (str: any, p: any, s: any): any => p + str + s);
 
-    const result = ce.query('.link :href | prefixAndSuffix(https:, ?q=123)');
+    const result = he.query('.link :href | prefixAndSuffix(https:, ?q=123)');
     expect(result).toBe('https://github.com?q=123');
   });
 });

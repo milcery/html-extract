@@ -1,41 +1,42 @@
 {
-  "name": "@celebi/cheerio-extract",
-  "version": "0.0.6",
+  "name": "@atlach/html-extract",
+  "version": "0.1.0",
   "description": "Get information using the string of the specified rule",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "type": "module",
+  "main": "./dist/html-extract.cjs",
+  "module": "./dist/html-extract.mjs",
+  "browser": "dist/html-extract.browser.js",
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "watch": "tsc -w",
-    "build": "tsc"
+    "build": "rimraf dist && rolldown -c"
   },
   "keywords": [
-    "cheerio",
     "crawler"
   ],
   "author": {
     "name": "Milcery",
     "email": "milcery@qq.com",
-    "url": "https://github.com/milcery/cheerio-extract"
+    "url": "https://github.com/milcery/html-extract"
   },
   "dependencies": {
-    "@celebi/mint-filter": "^3.0.1-beta.3",
-    "cheerio": "^1.0.0-rc.12"
+    "cheerio": "^1.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^29.2.4",
-    "@types/node": "^18.11.15",
-    "jest": "^29.3.1",
-    "ts-jest": "^29.0.3",
-    "typescript": "^4.9.4"
+    "@types/jest": "^29.5.14",
+    "@types/node": "^18.19.75",
+    "jest": "^29.7.0",
+    "rimraf": "^6.0.1",
+    "rolldown": "1.0.0-beta.3",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.3"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/milcery/cheerio-extract.git"
+    "url": "https://github.com/milcery/html-extract.git"
   },
   "bugs": {
-    "url": "https://github.com/milcery/cheerio-extract/issues"
+    "url": "https://github.com/milcery/html-extract/issues"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -45,6 +46,6 @@
     "transform": {
       "\\.ts$": "ts-jest"
     },
-    "testRegex": "/test/.*\\.(ts|js)$"
+    "testRegex": "/test/.*\\.test.(ts|js)$"
   }
 }

@@ -3,6 +3,7 @@ node_modules
 
 src
 test
+examples
 coverage
 
 .idea
@@ -10,6 +11,7 @@ coverage
 
 .editorconfig
 tsconfig.json
+rolldown.config.js
 
 *-lock.json
 *.lock
