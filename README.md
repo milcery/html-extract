@@ -53,7 +53,7 @@ he.useFilter();
 <script src="https://cdn.jsdelivr.net/npm/@atlach/html-extract@0.1.0/dist/html-extract.browser.js"></script>
 
 <script>
-  document.addEventListener('load', () => {
+  window.addEventListener('load', () => {
     const he = new HtmlExtract();
 
     // Get data

@@ -36,10 +36,9 @@
 </div>
 
 <script>
-  document.addEventListener('load', () => {
+  window.addEventListener('load', () => {
     const he = new HtmlExtract();
     const result = he.query('.link :href');
-
     console.log(result);
   });
 </script>
